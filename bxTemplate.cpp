@@ -1,8 +1,7 @@
 #include "bxTemplate.h"
 
 bxTemplate::bxTemplate()
-	: blot::AddonBase("bxTemplate", "1.0.0"), m_initialized(false),
-	  m_time(0.0f) {
+	: blot::IAddon("bxTemplate", "1.0.0") {
 	setDescription("Template addon for BLot creative coding");
 	setAuthor("Your Name");
 	setLicense("MIT");
@@ -14,32 +13,35 @@ bool bxTemplate::init() {
 	this->log("Initializing bxTemplate addon");
 
 	// Initialize addon-specific resources
-	m_initialized = true;
-
+	// m_initialized is now handled by IAddon
+	
 	this->log("bxTemplate addon initialized successfully");
 	return true;
 }
 
 void bxTemplate::setup() {
 	this->log("Setting up bxTemplate addon");
-
+	
 	// Example: Set up default parameters
-	//setParameter("speed", 1.0f);
-	//setParameter("amplitude", 100.0f);
-	//setParameter("frequency", 0.5f);
+	// setParameter("speed", 1.0f);
+	// setParameter("amplitude", 100.0f);
+	// setParameter("frequency", 0.5f);
 }
 
 void bxTemplate::update(float deltaTime) {
-	m_time += deltaTime;
+	// Time tracking is handled automatically by IAddon::blotUpdate()
+	// No need to call parent update
+}
 
+void bxTemplate::update(float deltaTime) {
 	// Update addon logic here
 	// Example: Update parameters based on time
-	//float speed = getParameter("speed");
-	//float amplitude = getParameter("amplitude");
-	//float frequency = getParameter("frequency");
+	// float speed = getParameter("speed");
+	// float amplitude = getParameter("amplitude");
+	// float frequency = getParameter("frequency");
 
 	// You can trigger events
-	//this->triggerEvent("update");
+	// this->triggerEvent("update");
 }
 
 void bxTemplate::draw() {
@@ -48,33 +50,14 @@ void bxTemplate::draw() {
 }
 
 void bxTemplate::cleanup() {
-	if (m_initialized) {
-		this->log("Cleaning up bxTemplate addon");
-		m_initialized = false;
-	}
+	this->log("Cleaning up bxTemplate addon");
+	// Cleanup is handled automatically by IAddon::blotCleanup()
 }
 
-void bxTemplate::setParameter(const std::string &name, float value) {
-	m_parameters[name] = value;
-
-	// Trigger callback if registered
-	auto it = m_callbacks.find(name);
-	if (it != m_callbacks.end()) {
-		it->second(value);
-	}
-
-	this->log("Parameter " + name + " set to " + std::to_string(value));
+void bxTemplate::cleanup() {
+	// Addon-specific cleanup
+	// m_initialized is now handled by IAddon
 }
 
-float bxTemplate::getParameter(const std::string &name) const {
-	auto it = m_parameters.find(name);
-	if (it != m_parameters.end()) {
-		return it->second;
-	}
-	return 0.0f;
-}
-
-void bxTemplate::onParameterChanged(const std::string &name,
-									std::function<void(float)> callback) {
-	m_callbacks[name] = callback;
-}
+// Parameter methods are now inherited from AddonBase
+// No need to reimplement setParameter, getParameter, onParameterChanged
