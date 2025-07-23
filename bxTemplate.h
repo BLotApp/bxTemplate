@@ -1,8 +1,8 @@
 #pragma once
-#include "core/AddonBase.h"
 #include <functional>
 #include <string>
 #include <unordered_map>
+#include "core/IAddon.h"
 
 class bxTemplate : public blot::IAddon {
   public:

@@ -1,7 +1,6 @@
 #include "bxTemplate.h"
 
-bxTemplate::bxTemplate()
-	: blot::IAddon("bxTemplate", "1.0.0") {
+bxTemplate::bxTemplate() : blot::IAddon("bxTemplate", "1.0.0") {
 	setDescription("Template addon for BLot creative coding");
 	setAuthor("Your Name");
 	setLicense("MIT");
@@ -14,23 +13,18 @@ bool bxTemplate::init() {
 
 	// Initialize addon-specific resources
 	// m_initialized is now handled by IAddon
-	
+
 	this->log("bxTemplate addon initialized successfully");
 	return true;
 }
 
 void bxTemplate::setup() {
 	this->log("Setting up bxTemplate addon");
-	
+
 	// Example: Set up default parameters
 	// setParameter("speed", 1.0f);
 	// setParameter("amplitude", 100.0f);
 	// setParameter("frequency", 0.5f);
-}
-
-void bxTemplate::update(float deltaTime) {
-	// Time tracking is handled automatically by IAddon::blotUpdate()
-	// No need to call parent update
 }
 
 void bxTemplate::update(float deltaTime) {
@@ -51,13 +45,9 @@ void bxTemplate::draw() {
 
 void bxTemplate::cleanup() {
 	this->log("Cleaning up bxTemplate addon");
-	// Cleanup is handled automatically by IAddon::blotCleanup()
-}
-
-void bxTemplate::cleanup() {
 	// Addon-specific cleanup
 	// m_initialized is now handled by IAddon
 }
 
-// Parameter methods are now inherited from AddonBase
+// Parameter methods are now inherited from IAddon
 // No need to reimplement setParameter, getParameter, onParameterChanged
